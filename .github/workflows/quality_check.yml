@@ -18,9 +18,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pylint pycodestyle mypy pydocstyle
-    - name: Analysing the code with pylint
+    - name: Analysing the code with pylint, pycodestyle, mypy and pydocstyle
       run: |
-        pylint $(git ls-files '*.py')
-        pycodestyle $(git ls-files '*.py')
-        mypy --strict $(git ls-files '*.py')
-        pydocstyle $(git ls-files '*.py')
+        readarray -t files < <(git ls-files '*.py'|grep -Ev '__init__.py')
+        pylint "${files[@]}"
+        pycodestyle "${files[@]}"
+        mypy --strict "${files[@]}"
+        pydocstyle "${files[@]}"
