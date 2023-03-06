@@ -3,6 +3,7 @@
 
 """Team Dynamix Ticket Operations."""
 
+from __future__ import annotations
 import configparser
 import json
 from requests.rest_requests import Request
